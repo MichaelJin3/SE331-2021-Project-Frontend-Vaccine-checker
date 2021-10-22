@@ -55,7 +55,7 @@
             <el-form-item label="Name">
               <el-input v-model="index"></el-input>
             </el-form-item>
-            <el-form-item label="Birth">
+            <el-form-item label="Age">
               <el-input v-model="index"></el-input>
             </el-form-item>
             <el-form-item label="Address">
