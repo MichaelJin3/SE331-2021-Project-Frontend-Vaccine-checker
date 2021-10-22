@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "axios": "^0.21.1",
+        "chokidar": "^3.5.2",
         "core-js": "^3.6.5",
         "element-plus": "^1.0.1-beta.27",
         "swiper": "^5.4.5",
