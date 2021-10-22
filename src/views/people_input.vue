@@ -63,9 +63,16 @@
             </el-form-item>
             <el-form-item label="Numbers">
               <el-select v-model="index" placeholder="Number of vaccinations">
-                <el-option label="1" value="shanghai"></el-option>
-                <el-option label="2" value="beijing"></el-option>
-                <el-option label="3" value="beijing"></el-option>
+                <el-option label="1" value="1"></el-option>
+                <el-option label="2" value="2"></el-option>
+                <el-option label="3" value="3"></el-option>
+              </el-select>
+            </el-form-item>
+             <el-form-item label="Doctor">
+              <el-select v-model="index" placeholder="Doctor Name">
+                <el-option label="Michael" value="Michael"></el-option>
+                <el-option label="Oat" value="Oat"></el-option>
+                <el-option label="Kong" value="Kong"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item>

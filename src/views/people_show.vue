@@ -43,19 +43,23 @@
         <el-col :span="18">
           <div class="from_list">
             <p>Name:</p>
-            <span>liukang</span>
+            <span> liukang</span>
           </div>
           <div class="from_list">
-            <p>Birth:</p>
-            <span>1990/01/01</span>
+            <p>Age:</p>
+            <span> 30</span>
           </div>
           <div class="from_list">
             <p>Address:</p>
-            <span>addressaddressaddressaddressaddressaddress</span>
+            <span> addressaddressaddressaddressaddressaddress</span>
           </div>
           <div class="from_list">
             <p>Number of vaccinations:</p>
-            <span>1</span>
+            <span> 1</span>
+          </div>
+          <div class="from_list">
+            <p>Status: </p>
+            <span> Received Vaccine</span>
           </div>
         </el-col>
       </el-row>
