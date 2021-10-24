@@ -1,37 +1,28 @@
 {
-    "name": "vue3-element-plus-demo",
-    "version": "0.1.0",
-    "private": true,
+    "version": "0.0.0",
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "dev": "concurrently \"json-server --watch db.json --port 3001\" \"vite\"",
+        "build": "vite build",
+        "serve": "vite preview"
     },
     "dependencies": {
         "axios": "^0.21.1",
-        "chokidar": "^3.5.2",
-        "core-js": "^3.6.5",
-        "element-plus": "^1.0.1-beta.27",
-        "swiper": "^5.4.5",
-        "vue": "^3.0.0",
-        "vue-awesome-swiper": "^4.1.1",
-        "vue-router": "^4.0.0-0",
-        "vuex": "^4.0.0-0"
+        "dayjs": "^1.10.6",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-vue": "^7.13.0",
+        "nprogress": "^0.2.0",
+        "prettier": "^2.3.2",
+        "vue": "^3.0.5",
+        "vue-meta": "^3.0.0-alpha.8",
+        "vue-router": "4",
+        "vuex": "^4.0.2"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "~4.5.0",
-        "@vue/cli-plugin-eslint": "~4.5.0",
-        "@vue/cli-plugin-router": "~4.5.0",
-        "@vue/cli-plugin-vuex": "~4.5.0",
-        "@vue/cli-service": "~4.5.0",
-        "@vue/compiler-sfc": "^3.0.0",
-        "@vue/eslint-config-standard": "^5.1.2",
-        "babel-eslint": "^10.1.0",
-        "eslint": "^6.7.2",
-        "eslint-plugin-import": "^2.20.2",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.0",
-        "eslint-plugin-vue": "^7.0.0-0"
+        "@vitejs/plugin-vue": "^1.2.4",
+        "@vue/compiler-sfc": "^3.0.5",
+        "autoprefixer": "^10.3.0",
+        "postcss": "^8.3.5",
+        "tailwindcss": "^2.2.4",
+        "vite": "^2.4.0"
     }
 }
