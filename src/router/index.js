@@ -8,6 +8,9 @@ import VaccinatedInfo from '../pages/VaccinatedInfo.vue'
 import VaccinatedProfileCard from '../components/VaccinatedProfileCard.vue'
 import VaccinatedVaccineCard from '../components/VaccinatedVaccineCard.vue'
 import VaccinatedAllInfo from '../components/VaccinatedAllInfo.vue'
+import LandingPage from '../pages/LandingPage.vue'
+import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 import NProgress from 'nprogress'
 import vaccineAPI from '../services/vaccineAPI.js'
 import GlobalState from '../store/index'
@@ -26,6 +29,21 @@ function isValidDoctor(DocName) {
 const routes = [
     {
         path: '/',
+        name: 'LandingPage',
+        component: LandingPage
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register 
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login 
+    },
+    {
+        path: '/home',
         name: 'Home',
         component: Home,
         props: (route) => ({ page: parseInt(route.query.page) || 1 }),
