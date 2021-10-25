@@ -64,15 +64,12 @@ export default {
                     </div>
 
                     <div class="flex items-right mt-4 md:mt-0 relative">
-                        <button class="relative z-10 block p-2 bg-white rounded-md" @click="show">
-                           Doctor Login 
-                        </button>
-                        <div v-if="toggle" class="absolute right-0 z-20 w-48 py-4 md:mt-10 bg-white rounded-md shadow-xl">
-                            <router-link v-for="doctor in doctors" :key="doctor" :to="{name:'Doctor',params:{name:doctor}}" @click="show" 
-                            class="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform hover:bg-blue-500 hover:text-white">
-                                 Login as Dr. {{ doctor }} 
-                            </router-link>
-                        </div>
+                        <router-link class="relative z-10 block p-2 bg-white rounded-md hover:text-green-600" to="/login">
+                           Login 
+                        </router-link>
+                        <router-link class="relative z-10 block p-2 bg-white rounded-md hover:text-green-600" to="/register">
+                            Reigster 
+                        </router-link>
                     </div>
                 </div>
             </div>
