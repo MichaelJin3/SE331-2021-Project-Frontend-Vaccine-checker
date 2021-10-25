@@ -2,14 +2,16 @@ import apiClient from "./axiosClient";
 import GlobalStorage from '../store'
 export default{
     register(user){
-        return apiClient.post('/register',{
+        console.log(user)
+        return apiClient.post('/registers',{
             "username" : user.username,
             "password" : user.password,
-            // "sex" : use,
+            "sex" : user.sex,
             "firstname" : user.firstname,
             "lastname" : user.lastname,
             "email" : user.email,
-            "hometown" : user.hometown
+            "hometown" : user.hometown,
+            "birthday": user.birthday
         }).then((response) => {
             localStorage.setItem('token',response.data.token)
             localStorage.setItem('user',JSON.stringify(response.data.user))

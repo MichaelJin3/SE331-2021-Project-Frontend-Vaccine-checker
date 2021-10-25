@@ -55,6 +55,12 @@
                     <Field name="hometown" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
                     <ErrorMessage name="hometown" class="text-red-500"/>
                 </div>
+
+                 <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="birthday">Birthday</label>
+                    <Field name="birthday" type="date" min="1960-01-01" max="2010-01-01" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
+                    <ErrorMessage name="birthday" class="text-red-500"/>
+                </div>
             </div>
 
             <div class="flex justify-end mt-6">
@@ -115,6 +121,9 @@ export default {
             hometown : 
             yup.string()
             .required("your hometown is required!"),
+            birthday :
+            yup.string()
+            .required("your birthday is required!"),
         })
         return {
             sex: '',
