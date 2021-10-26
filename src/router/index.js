@@ -7,12 +7,14 @@ import NetWorkErr from '../pages/NetworkErr.vue'
 import VaccinatedInfo from '../pages/VaccinatedInfo.vue'
 import VaccinatedProfileCard from '../components/VaccinatedProfileCard.vue'
 import VaccinatedVaccineCard from '../components/VaccinatedVaccineCard.vue'
+import PatientList from '../components/adminComponent/PatientList.vue'
+import DoctorList from '../components/adminComponent/DoctorList.vue'
+import UnverifyList from '../components/adminComponent/UnverifyList.vue'
 import VaccinatedAllInfo from '../components/VaccinatedAllInfo.vue'
 import LandingPage from '../pages/LandingPage.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import NProgress from 'nprogress'
-import vaccineAPI from '../services/vaccineAPI.js'
 import patientAPI from '../services/patientAPI'
 import GlobalState from '../store/index'
 
@@ -51,7 +53,27 @@ const routes = [
             if(GlobalState.currentUser.authorities[0] !== "ROLE_ADMIN"){
                 return {name : 'LandingPage'}
             }
-        }
+        },
+        children : [
+            {
+                path: '',
+                name: 'GetPatient',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: PatientList
+            },
+            {
+                path: 'doctor',
+                name: 'GetDoctor',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: DoctorList 
+            },
+            {
+                path: 'unverify',
+                name: 'GetUnverifyUser',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: UnverifyList
+            },
+        ]
     },
     {
         path: '/about',
