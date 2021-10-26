@@ -11,6 +11,7 @@ import VaccinatedVaccineCard from '../components/VaccinatedVaccineCard.vue'
 import PatientList from '../components/adminComponent/PatientList.vue'
 import DoctorList from '../components/adminComponent/DoctorList.vue'
 import UnverifyList from '../components/adminComponent/UnverifyList.vue'
+import PatientInCareList from '../components/adminComponent/PatientInCareList.vue'
 import VaccinatedAllInfo from '../components/VaccinatedAllInfo.vue'
 import LandingPage from '../pages/LandingPage.vue'
 import Login from '../pages/Login.vue'
@@ -52,7 +53,7 @@ const routes = [
         name: 'Home',
         component: Home,
         beforeEnter: (to) =>{
-            if(GlobalState.currentUser.authorities[0] !== "ROLE_ADMIN"){
+            if(GlobalState.currentUser.authorities[0] !== "ROLE_ADMIN" && GlobalState.currentUser.authorities[0] !== "ROLE_DOCTOR"){
                 return {name : 'LandingPage'}
             }
         },
@@ -75,6 +76,12 @@ const routes = [
                 props: (route) => ({ page: parseInt(route.query.page) || 1 }),
                 component: UnverifyList
             },
+            {
+                path: 'patient-in-care',
+                name: 'GetPatientInCare',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: PatientInCareList 
+            }
         ]
     },
     {
@@ -88,6 +95,20 @@ const routes = [
         component: VaccinatedInfo,
         props: true,
         beforeEnter: (to) => {
+            if(GlobalState.currentUser.authorities[0] === "ROLE_DOCTOR"){
+                return doctorAPI.getSpecificPatient(to.params.id).then((res) => {
+                    GlobalState.vaccinatedPerson = res.data    
+                }).catch((err) => {
+                    if (error.response && error.response.status == 404) {
+                        return {
+                            name: '404Resource',
+                            params: { resource: 'event' },
+                        }
+                    } else {
+                        return { name: 'NetworkError' }
+                    }
+                }) 
+            }
             return patientAPI 
                 .getPatient(to.params.id)
                 .then((res) => {
