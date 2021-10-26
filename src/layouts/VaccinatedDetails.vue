@@ -20,6 +20,5 @@ export default {
                 <router-view :vaccinatedPerson="vaccinatedPerson"/>
             </div>
         </div>
-    </div>  
-
+    </div>
 </template>

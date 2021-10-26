@@ -15,21 +15,12 @@
             <UnverifyCard v-for="People in unverifyPeople" :key="People.id" :user="People" />
         </div>
     </DefaultLayout>
-    <div v-if="GlobalState.isdoctor" class="flex justify-between justify-items-center py-5 px-36">
-        <router-link id="page-prev" :to="{ name: 'Doctor',params:{name:GlobalState.doctorName} ,query: { page: page - 1 } }" rel="prev" v-if="page != 1">
+    <div class="flex justify-between justify-items-center py-5 px-36">
+        <router-link id="page-prev" :to="{ name: 'Home', query: { page: page - 1 } }" rel="prev">
             Prev</router-link
         >
         <div></div>
-        <router-link id="page-next" :to="{ name: 'Doctor',params:{name:GlobalState.doctorName} ,query: { page: page + 1 } }" rel="next" v-if="hasNextPage">
-            Next</router-link
-        >
-    </div>
-    <div v-else class="flex justify-between justify-items-center py-5 px-36">
-        <router-link id="page-prev" :to="{ name: 'Home', query: { page: page - 1 } }" rel="prev" v-if="page != 1">
-            Prev</router-link
-        >
-        <div></div>
-        <router-link id="page-next" :to="{ name: 'Home', query: { page: page + 1 } }" rel="next" v-if="hasNextPage">
+        <router-link id="page-next" :to="{ name: 'Home', query: { page: page + 1 } }" rel="next">
             Next</router-link
         >
     </div>

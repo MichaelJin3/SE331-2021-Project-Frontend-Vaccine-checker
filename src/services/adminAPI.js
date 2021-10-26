@@ -22,5 +22,12 @@ export default {
     },
     verifyAsPatient(id){
         return apiClient.post('/verify-user/' + id + '/patient' )
+    },
+    updateVaccine(data){
+        return apiClient.post('/update-vaccine',{
+            "vaccinated_when":data.vaccinated_when,
+            "patient_id":data.patient_id,
+            "vaccine_id":data.vaccine_id
+        })
     }
 }
