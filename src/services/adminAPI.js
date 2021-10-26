@@ -17,4 +17,10 @@ export default {
     getUnverify(perPage, page){
         return apiClient.get('/un-verify-users?_limit=' + perPage + '&_page=' + page)
     },
+    verifyAsDoctor(id){
+        return apiClient.post('/verify-user/' + id + '/doctor' )
+    },
+    verifyAsPatient(id){
+        return apiClient.post('/verify-user/' + id + '/patient' )
+    }
 }

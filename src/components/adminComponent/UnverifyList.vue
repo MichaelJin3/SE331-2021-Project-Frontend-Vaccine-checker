@@ -64,7 +64,6 @@ export default {
                 .then((response) => {
                     this.unverifyPeople = response.data
                     this.totalPeople = response.headers['x-total-count']
-                    console.log(this.unverifyPeople)
                 })
                 .catch(() => {
                     console.log('err')
@@ -74,7 +73,6 @@ export default {
     computed: {
         hasNextPage() {
             let totalPages = Math.ceil(this.totalPeople / 3) // 2 is events per page
-            console.log(this.GlobalState)
             return this.page < totalPages
         },
     },
