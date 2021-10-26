@@ -54,7 +54,7 @@ const routes = [
         component: Home,
         beforeEnter: (to) =>{
             if(GlobalState.currentUser.authorities[0] !== "ROLE_ADMIN" && GlobalState.currentUser.authorities[0] !== "ROLE_DOCTOR"){
-                return {name : 'LandingPage'}
+                return {name:'VaccinatedAllInfo', params: { id: GlobalState.currentUser.id }}
             }
         },
         children : [
