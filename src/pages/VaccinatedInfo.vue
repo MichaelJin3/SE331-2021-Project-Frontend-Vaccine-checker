@@ -42,7 +42,7 @@ export default {
         <br />
     </DefaultLayout>
 
-    <DefaultLayout v-if="GlobalState.isdoctor">
+    <DefaultLayout v-if="GlobalState.currentUser.authorities[0] === 'ROLE_DOCTOR'">
         <DoctorCommentBox />
     </DefaultLayout>
     <DefaultLayout v-else>
