@@ -1,32 +1,22 @@
 <script>
+import doctorAPI from '../services/doctorAPI'
 export default {
     inject:['GlobalState'],
     data(){
         return {
-            pic:{
-                Roger: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-                Lipton:"https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
-                SomChai: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
-                Lillie: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-                Light: "https://images.unsplash.com/photo-1601583789200-96cd7f385315?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
-            },
             msg:""
         }
     },
     methods:{
         comment(){
-            if(this.msg.length === 0){
-                alert('you need to tell something to this person...')
-                return 
+            let data = {
+                "content": this.msg,
+                "comment_by": this.GlobalState.currentUser.id,
+                "comment_to": this.GlobalState.vaccinatedPerson.id
             }
-            const comment = {
-                id:this.GlobalState.vaccinatedPerson.id,
-                comment_pic: this.pic[this.GlobalState.doctorName],
-                comment_by: this.GlobalState.doctorName,
-                comment: this.msg,
-            }
-            this.GlobalState.vaccinatedPerson.doctor_comment.push(comment);
-            this.GlobalState.doctorComment.push(comment)
+            doctorAPI.postSugession(data).then(()=>{
+                this.$router.push({name:'VaccinatedAllInfo', params: { id: this.GlobalState.vaccinatedPerson.id }})
+            })
         }
     } 
 }
