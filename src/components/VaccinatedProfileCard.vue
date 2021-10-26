@@ -8,17 +8,17 @@ export default {
     },
     created() {
         const date = new Date()
-        const current = new Date(this.vaccinatedPerson.birthday)
+        const current = new Date(this.vaccinatedPerson.date_of_birth)
         this.age = parseInt(date.getFullYear()) - parseInt(current.getFullYear())
     },
 }
 </script>
 <template>
-    <div>
+   <div>
         <h1 class="text-3xl font-bold pt-8 lg:pt-0">
             <span v-if="vaccinatedPerson.sex == 'male'">Mr. </span>
             <span v-else>Ms.</span>
-            {{ this.vaccinatedPerson.name }} {{ this.vaccinatedPerson.surname }}
+            {{ this.vaccinatedPerson.firstname }} {{ this.vaccinatedPerson.lastname }}
         </h1>
 
         <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>

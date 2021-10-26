@@ -10,6 +10,7 @@ export default {
             localStorage.setItem('token',response.data.token)
             localStorage.setItem('user',JSON.stringify(response.data.user))                
             GlobalStorage.currentUser = response.data.user
+            console.log(GlobalStorage.currentUser.username)
             return Promise.resolve(response.data)           
         }).catch((error) => {
             return Promise.reject(error)

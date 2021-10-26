@@ -56,7 +56,7 @@ export default {
         handleLogin(user){
             Login.login(user)
             .then(()=>{
-                this.$router.push({name:'LandingPage'})
+                this.$router.push({name:'Home'})
             }).catch(()=>{
                 console.log("could not login")
             })            

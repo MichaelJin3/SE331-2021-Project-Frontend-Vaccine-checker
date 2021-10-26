@@ -45,7 +45,7 @@
 import VaccinatedCard from '../components/VaccinatedCard.vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import CustomerHeader from '../components/Header.vue'
-import VaccinatedService from '../services/vaccineAPI'
+import PatientAPI from '../services/patientAPI'
 import { watchEffect } from '@vue/runtime-core'
 export default {
     name: 'Home',
@@ -69,8 +69,7 @@ export default {
     },
     created() {
         watchEffect(() => {
-            VaccinatedService.getVaccinatedPeople(3, this.page)
-
+            PatientAPI.getPatients(3, 1)
                 .then((response) => {
                     this.vaccinatedPeople = response.data
                     this.totalPeople = response.headers['x-total-count']

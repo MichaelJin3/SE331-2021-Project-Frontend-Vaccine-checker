@@ -10,7 +10,8 @@ export default {
     },
 
     created() {
-        const d = dayjs(this.vaccine.vaccinated_date);
+        console.log(this.vaccine)
+        const d = dayjs(this.vaccine.vaccinated_when);
         this.date = d.format('dddd MMMM D, YYYY');
     }
 
@@ -19,12 +20,12 @@ export default {
 <template>
     <div class="flex w-full max-w-sm mx-auto mt-5 overflow-hidden bg-white rounded-lg shadow-md hover:shadow-lg">
         <div class="flex items-center justify-center w-12 bg-green-500">
-            <p class="text-white font-bold">{{vaccine.short}}</p>
+            <p class="text-white font-bold">{{vaccine.injected_vaccine.short_title}}</p>
         </div>
         
         <div class="px-4 py-2 -mx-3">
             <div class="mx-3">
-                <span class="font-semibold text-green-500 dark:text-green-400">{{vaccine.title}}</span>
+                <span class="font-semibold text-green-500 dark:text-green-400">{{vaccine.injected_vaccine.title}}</span>
                 <p class="text-sm text-gray-600 dark:text-gray-200">{{this.date}}</p>
             </div>
         </div>

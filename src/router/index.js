@@ -13,6 +13,7 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import NProgress from 'nprogress'
 import vaccineAPI from '../services/vaccineAPI.js'
+import patientAPI from '../services/patientAPI'
 import GlobalState from '../store/index'
 
 const name = ['Roger', 'Lipton', 'SomChai', 'Lillie', 'Light']
@@ -46,11 +47,11 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: Home,
-        props: (route) => ({ page: parseInt(route.query.page) || 1 }),
-        beforeEnter: () => {
-            GlobalState.isdoctor = false
-            GlobalState.doctorName = ''
-        },
+        beforeEnter: (to) =>{
+            if(GlobalState.currentUser.authorities[0] !== "ROLE_ADMIN"){
+                return {name : 'LandingPage'}
+            }
+        }
     },
     {
         path: '/about',
@@ -63,16 +64,11 @@ const routes = [
         component: VaccinatedInfo,
         props: true,
         beforeEnter: (to) => {
-            return vaccineAPI
-                .getVaccinatedPerson(to.params.id)
+            return patientAPI 
+                .getPatient(to.params.id)
                 .then((res) => {
-                    GlobalState.vaccinatedPerson = res.data
-                    for (let item of GlobalState.doctorComment) {
-                        if (item.id == GlobalState.vaccinatedPerson.id) {
-                            console.log(item)
-                            GlobalState.vaccinatedPerson.doctor_comment.push(item)
-                        }
-                    }
+                    console.log(res.data)
+                    GlobalState.vaccinatedPerson = res.data    
                 })
                 .catch((err) => {
                     if (error.response && error.response.status == 404) {

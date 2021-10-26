@@ -1768,6 +1768,11 @@
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.15"
 
+"vite-plugin-cross-origin-isolation@^0.1.1":
+  "integrity" "sha512-egyW4CSWORimC2NbIJDJ8Ga1eoUBscFDvY9oLYBfiKHdYHMCiOiIeqtXbgv/2V7aYs//KIP34H2eQw1hEBARwg=="
+  "resolved" "https://registry.npmjs.org/vite-plugin-cross-origin-isolation/-/vite-plugin-cross-origin-isolation-0.1.1.tgz"
+  "version" "0.1.1"
+
 "vite@^2.4.0":
   "integrity" "sha512-4BpKRis9uxIqPfIEcJ18LTBsamqnDFxTx45CXwagHjNltHa6PFEvf8Pe6OpgIHb0OyWT30OXOSSQvdOaX4OBiQ=="
   "resolved" "https://registry.npmjs.org/vite/-/vite-2.4.1.tgz"
