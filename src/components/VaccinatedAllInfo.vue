@@ -38,6 +38,13 @@ export default {
         <p class="pt-4 text-base font-medium flex items-center justify-center lg:justify-start">
             <span class="font-bold px-1">Age: </span> {{ this.age }}
         </p>
+
+        <p v-if="this.vaccinatedPerson.takeCare!=null" class="pt-4 text-base font-medium flex items-center justify-center lg:justify-start">
+            <span class="font-bold px-1">take care by: </span>Dr. {{ this.vaccinatedPerson.takeCare.firstname }} {{ this.vaccinatedPerson.takeCare.lastname }}
+        </p>
+        <p v-else class="pt-4 text-base font-medium flex items-center justify-center lg:justify-start">
+            <span class="font-bold px-1">take care by: not assign doctor yet </span>
+        </p>
     </div>    
     <br />
     <div>

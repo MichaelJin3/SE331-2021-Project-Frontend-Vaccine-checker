@@ -55,6 +55,7 @@ export default {
                 .then((response) => {
                     this.doctorList = response.data
                     this.totalPeople = response.headers['x-total-count']
+                    console.log(response.data)
                 })
                 .catch(() => {
                     console.log('err')

@@ -5,6 +5,7 @@ import About from '../pages/About.vue'
 import NotFound from '../pages/NotFound.vue'
 import NetWorkErr from '../pages/NetworkErr.vue'
 import VaccinatedInfo from '../pages/VaccinatedInfo.vue'
+import DoctorInfo from '../pages/DoctorInfo.vue'
 import VaccinatedProfileCard from '../components/VaccinatedProfileCard.vue'
 import VaccinatedVaccineCard from '../components/VaccinatedVaccineCard.vue'
 import PatientList from '../components/adminComponent/PatientList.vue'
@@ -16,6 +17,7 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import NProgress from 'nprogress'
 import patientAPI from '../services/patientAPI'
+import doctorAPI from '../services/doctorAPI'
 import GlobalState from '../store/index'
 
 const name = ['Roger', 'Lipton', 'SomChai', 'Lillie', 'Light']
@@ -122,17 +124,26 @@ const routes = [
         ],
     },
     {
-        path: '/doctor/:name',
+        path: '/doctor/:id',
         name: 'Doctor',
-        component: Home,
-        props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+        component: DoctorInfo ,
         beforeEnter: (to) => {
-            if (isValidDoctor(to.params.name)) {
-                GlobalState.isdoctor = true
-                GlobalState.doctorName = to.params.name
-            } else {
-                return { name: '404Resource', params: { resource: 'Doctor' } }
-            }
+            return doctorAPI 
+                .getDoctor(to.params.id)
+                .then((res) => {
+                    console.log(res.data)
+                    GlobalState.doctor = res.data    
+                })
+                .catch((err) => {
+                    if (error.response && error.response.status == 404) {
+                        return {
+                            name: '404Resource',
+                            params: { resource: 'event' },
+                        }
+                    } else {
+                        return { name: 'NetworkError' }
+                    }
+                })
         },
     },
     {

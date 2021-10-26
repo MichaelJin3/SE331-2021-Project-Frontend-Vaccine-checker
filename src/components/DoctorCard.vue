@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/home">
+    <router-link :to="{name:'Doctor', params: { id: doctor.id } }">
         <div class="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
             <img class="object-cover w-full h-56" :src="doctor.imageUrls[0]" alt="avatar">
             <div class="py-5 text-center">

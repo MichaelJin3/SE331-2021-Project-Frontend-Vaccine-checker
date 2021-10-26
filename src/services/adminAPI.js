@@ -5,6 +5,9 @@ export default {
     getPatients(perPage, page){
         return apiClient.get('/patients?_limit=' + perPage + '&_page=' + page)
     },
+    get100Patients(){
+        return apiClient.get('/patients?_limit=100') 
+    },
     getPatient(id){
         return apiClient.get('/patients/' + id)
     },
@@ -28,6 +31,12 @@ export default {
             "vaccinated_when":data.vaccinated_when,
             "patient_id":data.patient_id,
             "vaccine_id":data.vaccine_id
+        })
+    },
+    givePatientAService(data){
+        return apiClient.post('/update-doctor',{
+            "patient_id": data.patient_id,
+            "doctor_id": data.doctor_id
         })
     }
 }

@@ -22,7 +22,12 @@
                   class="text-sm text-gray-700 hover:text-green-300">
                     got 3 dose (booster) 
                 </router-link>
-
+                
+                <router-link to="/home"
+                  v-else 
+                  class="text-sm text-gray-700 hover:text-green-300">
+                    overdose 
+                </router-link>
             </div>
         </div>
     </router-link>

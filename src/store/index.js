@@ -5,6 +5,7 @@ export default reactive(
         flashMessage: '',
         details: null,
         vaccinatedPerson: null,
+        doctor:null,
         isdoctor: false,
         doctorName: '',
         doctorComment: [],
