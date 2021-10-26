@@ -11,13 +11,16 @@ export default {
         DoctorComment,
         DoctorCommentBox
     },
+    computed(){
+        console.log(GlobalState.vaccinatedPerson)
+    }
 }
 </script>
 
 <template>
     <DefaultLayout>
         <div class="divide-x-2 divide-green-500">
-            <router-link :to="{name:'VaccinatedAllInfo'}" class="text-2xl px-2 font-medium hover:text-green-300">{{GlobalState.vaccinatedPerson.name}} </router-link>
+            <router-link :to="{name:'VaccinatedAllInfo'}" class="text-2xl px-2 font-medium hover:text-green-300"> {{GlobalState.vaccinatedPerson.firstname}}</router-link>
             <router-link :to="{name:'VaccinatedInfo'}"  class="text-2xl px-2 font-medium hover:text-green-300"> Info </router-link>
             <router-link :to="{name:'VaccinatedVaccine'}"  class="text-2xl px-2 font-medium hover:text-green-300"> Vaccine </router-link>
             <span></span>
@@ -30,8 +33,8 @@ export default {
         <p class="text-3xl text-green-800">Doctor Comment</p>
     </DefaultLayout>
 
-    <DefaultLayout v-if="GlobalState.vaccinatedPerson.doctor_comment.length != 0">
-        <DoctorComment v-for="comment in GlobalState.vaccinatedPerson.doctor_comment" :key="comment.comment_date" :doctor="comment"/>
+    <DefaultLayout v-if="GlobalState.vaccinatedPerson.doctor_suggestion.length != 0">
+        <DoctorComment v-for="comment in GlobalState.vaccinatedPerson.doctor_suggestion" :key="comment.comment_when" :doctor="comment"/>
     </DefaultLayout>
 
     <DefaultLayout v-else>
