@@ -36,7 +36,7 @@
                 </div>
                 <!--Right Col-->
                 <div class="w-full md:w-3/5 py-6 text-center">
-                    <img class="w-full md:w-4/5 z-50" src="https://image.freepik.com/free-vector/covid-19-vaccine-vector-doodle-illustration-vial-with-needle-doodle-clinical-trial_53876-136671.jpg" />
+                    <img class="w-full md:w-4/5 z-50" src="../assets/covid-19-vaccine-vector.jpg" />
                 </div>
             </div>
         </div>
