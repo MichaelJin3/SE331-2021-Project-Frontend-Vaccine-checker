@@ -21,20 +21,20 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          username: oat431
+          password: a7dfba31-e2ca-49b2-96a8-b701bce97ad4
       - 
         name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/se331-project:latest
+          tags: oat431/se331-greenlake-frontend:latest
       -
         name: prepare the docker-compose run
         run: |
           mkdir vue-project-331
           cp docker-compose.yml vue-project-331/docker-compose.yml
           cd vue-project-331
-          docker-compose -H ${{ secrets.HOST_SERVER }} pull
-          docker-compose -H ${{ secrets.HOST_SERVER }} up -d 
+          docker-compose -H tcp://54.146.210.137:5039 pull
+          docker-compose -H tcp://54.146.210.137:5039 up -d 

@@ -2,6 +2,6 @@ version: "3.9"
 
 services:
     web:
-        image: "oat431/se331-project"
+        image: "oat431/se331-greenlake-frontend"
         ports: 
             - 80:80
