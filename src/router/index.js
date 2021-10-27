@@ -5,11 +5,20 @@ import About from '../pages/About.vue'
 import NotFound from '../pages/NotFound.vue'
 import NetWorkErr from '../pages/NetworkErr.vue'
 import VaccinatedInfo from '../pages/VaccinatedInfo.vue'
+import DoctorInfo from '../pages/DoctorInfo.vue'
 import VaccinatedProfileCard from '../components/VaccinatedProfileCard.vue'
 import VaccinatedVaccineCard from '../components/VaccinatedVaccineCard.vue'
+import PatientList from '../components/adminComponent/PatientList.vue'
+import DoctorList from '../components/adminComponent/DoctorList.vue'
+import UnverifyList from '../components/adminComponent/UnverifyList.vue'
+import PatientInCareList from '../components/adminComponent/PatientInCareList.vue'
 import VaccinatedAllInfo from '../components/VaccinatedAllInfo.vue'
+import LandingPage from '../pages/LandingPage.vue'
+import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 import NProgress from 'nprogress'
-import vaccineAPI from '../services/vaccineAPI.js'
+import patientAPI from '../services/patientAPI'
+import doctorAPI from '../services/doctorAPI'
 import GlobalState from '../store/index'
 
 const name = ['Roger', 'Lipton', 'SomChai', 'Lillie', 'Light']
@@ -26,13 +35,54 @@ function isValidDoctor(DocName) {
 const routes = [
     {
         path: '/',
+        name: 'LandingPage',
+        component: LandingPage
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register 
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login 
+    },
+    {
+        path: '/home',
         name: 'Home',
         component: Home,
-        props: (route) => ({ page: parseInt(route.query.page) || 1 }),
-        beforeEnter: () => {
-            GlobalState.isdoctor = false
-            GlobalState.doctorName = ''
+        beforeEnter: (to) =>{
+            if(GlobalState.currentUser.authorities[0] !== "ROLE_ADMIN" && GlobalState.currentUser.authorities[0] !== "ROLE_DOCTOR"){
+                return {name:'VaccinatedAllInfo', params: { id: GlobalState.currentUser.id }}
+            }
         },
+        children : [
+            {
+                path: '',
+                name: 'GetPatient',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: PatientList
+            },
+            {
+                path: 'doctor',
+                name: 'GetDoctor',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: DoctorList 
+            },
+            {
+                path: 'unverify',
+                name: 'GetUnverifyUser',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: UnverifyList
+            },
+            {
+                path: 'patient-in-care',
+                name: 'GetPatientInCare',
+                props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+                component: PatientInCareList 
+            }
+        ]
     },
     {
         path: '/about',
@@ -45,16 +95,25 @@ const routes = [
         component: VaccinatedInfo,
         props: true,
         beforeEnter: (to) => {
-            return vaccineAPI
-                .getVaccinatedPerson(to.params.id)
-                .then((res) => {
-                    GlobalState.vaccinatedPerson = res.data
-                    for (let item of GlobalState.doctorComment) {
-                        if (item.id == GlobalState.vaccinatedPerson.id) {
-                            console.log(item)
-                            GlobalState.vaccinatedPerson.doctor_comment.push(item)
+            if(GlobalState.currentUser.authorities[0] === "ROLE_DOCTOR"){
+                return doctorAPI.getSpecificPatient(to.params.id).then((res) => {
+                    GlobalState.vaccinatedPerson = res.data    
+                }).catch((err) => {
+                    if (error.response && error.response.status == 404) {
+                        return {
+                            name: '404Resource',
+                            params: { resource: 'event' },
                         }
+                    } else {
+                        return { name: 'NetworkError' }
                     }
+                }) 
+            }
+            return patientAPI 
+                .getPatient(to.params.id)
+                .then((res) => {
+                    console.log(res.data)
+                    GlobalState.vaccinatedPerson = res.data    
                 })
                 .catch((err) => {
                     if (error.response && error.response.status == 404) {
@@ -86,17 +145,26 @@ const routes = [
         ],
     },
     {
-        path: '/doctor/:name',
+        path: '/doctor/:id',
         name: 'Doctor',
-        component: Home,
-        props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+        component: DoctorInfo ,
         beforeEnter: (to) => {
-            if (isValidDoctor(to.params.name)) {
-                GlobalState.isdoctor = true
-                GlobalState.doctorName = to.params.name
-            } else {
-                return { name: '404Resource', params: { resource: 'Doctor' } }
-            }
+            return doctorAPI 
+                .getDoctor(to.params.id)
+                .then((res) => {
+                    console.log(res.data)
+                    GlobalState.doctor = res.data    
+                })
+                .catch((err) => {
+                    if (error.response && error.response.status == 404) {
+                        return {
+                            name: '404Resource',
+                            params: { resource: 'event' },
+                        }
+                    } else {
+                        return { name: 'NetworkError' }
+                    }
+                })
         },
     },
     {
