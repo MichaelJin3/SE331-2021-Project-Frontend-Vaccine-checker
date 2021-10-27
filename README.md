@@ -1,5 +1,5 @@
 # SE331 Term Project 🛠
-frontend
+frontend deploy [here](http://54.146.210.137/) : http://54.146.210.137/
 
 ## team memebers 🌿
 | No. | Name | Student ID | Github Account |
